@@ -77,7 +77,8 @@ class ProfileSettings extends StatelessWidget {
         elevation: 0.0,
         leading: IconButton(
           onPressed: () {
-            context.beamToNamed('/settings');
+            // context.beamToNamed('/settings');
+            context.beamBack();
           },
           icon: const Icon(
             Icons.arrow_back_ios_new_rounded,
@@ -112,7 +113,8 @@ class AccountSettings extends StatelessWidget {
         elevation: 0.0,
         leading: IconButton(
           onPressed: () {
-            context.beamToNamed('/settings');
+            // context.beamToNamed('/settings');
+            context.beamBack();
           },
           icon: const Icon(
             Icons.arrow_back_ios_new_rounded,

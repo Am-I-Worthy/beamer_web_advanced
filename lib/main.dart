@@ -1,5 +1,3 @@
-import 'package:animated_rail/animated_rail/AnimatedRail.dart';
-import 'package:animated_rail/animated_rail/RailItem.dart';
 import 'package:beamer/beamer.dart';
 import 'package:beamer_web_advanced/Locations/main_screen_locations.dart';
 import 'package:beamer_web_advanced/landing_screen.dart';
@@ -14,12 +12,16 @@ class MyApp extends StatelessWidget {
 
   final routerDelegate = BeamerDelegate(
     transitionDelegate: const NoAnimationTransitionDelegate(),
+
+    // NOTE FIRST METHOD
     // locationBuilder: RoutesLocationBuilder(routes: {
-    //   '*': (context, state, data) => const Home(),
+    //   '*': (context, state, data) => const LandingScreen(),
     // }),
-    // Second Method
+
+    // NOTE Second Method
     locationBuilder: (routeInformation, _) => HomeLocation(routeInformation),
   );
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(

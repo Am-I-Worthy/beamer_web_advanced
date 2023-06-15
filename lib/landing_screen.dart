@@ -1,5 +1,10 @@
 import 'package:beamer/beamer.dart';
 import 'package:beamer_web_advanced/Locations/main_screen_locations.dart';
+import 'package:beamer_web_advanced/Screens/about.dart';
+import 'package:beamer_web_advanced/Screens/dashboard.dart';
+import 'package:beamer_web_advanced/Screens/notification.dart';
+import 'package:beamer_web_advanced/Screens/profile.dart';
+import 'package:beamer_web_advanced/Screens/settings.dart';
 import 'package:flutter/material.dart';
 
 class LandingScreen extends StatefulWidget {
@@ -33,73 +38,73 @@ class _LandingScreenState extends State<LandingScreen> {
               key: _beamerKey,
               routerDelegate: BeamerDelegate(
                 // NOTE First Method
-                // locationBuilder: RoutesLocationBuilder(
-                //   routes: {
-                //     '*': (context, state, data) => const SizedBox(),
-                //     '/settings': (context, state, data) {
-                //       print(state.pathPatternSegments);
-                //       if (state.pathPatternSegments.contains('account')) {
-                //         return BeamPage(
-                //           key: ValueKey('AccountsSettings - ${DateTime.now()}'),
-                //           type: BeamPageType.scaleTransition,
-                //           child: const AccountSettings(),
-                //         );
-                //       } else if (state.pathPatternSegments
-                //           .contains('profile')) {
-                //         return BeamPage(
-                //           key: ValueKey('ProfileSettings - ${DateTime.now()}'),
-                //           type: BeamPageType.scaleTransition,
-                //           child: const ProfileSettings(),
-                //         );
-                //       }
-                //       return BeamPage(
-                //         key: ValueKey('Settings - ${DateTime.now()}'),
-                //         type: BeamPageType.scaleTransition,
-                //         child: const Settings(),
-                //       );
-                //     },
-                //     '/dashboard': (context, state, data) => const BeamPage(
-                //           key: ValueKey('Dashboard'),
-                //           type: BeamPageType.scaleTransition,
-                //           child: Dashboard(),
-                //         ),
-                //     '/profile': (context, state, data) => const BeamPage(
-                //           key: ValueKey('Profile'),
-                //           type: BeamPageType.scaleTransition,
-                //           child: Profile(),
-                //         ),
-                //     '/notifications': (context, state, data) => const BeamPage(
-                //           key: ValueKey('Notification'),
-                //           type: BeamPageType.scaleTransition,
-                //           child: Notifications(),
-                //         ),
-                //     '/about': (context, state, data) => const BeamPage(
-                //           key: ValueKey('About'),
-                //           type: BeamPageType.scaleTransition,
-                //           child: About(),
-                //         ),
-                //   },
-                // ),
+                locationBuilder: RoutesLocationBuilder(
+                  routes: {
+                    '*': (context, state, data) => const SizedBox(),
+                    '/settings': (context, state, data) {
+                      print(state.pathPatternSegments);
+                      if (state.pathPatternSegments.contains('account')) {
+                        return BeamPage(
+                          key: ValueKey('AccountsSettings - ${DateTime.now()}'),
+                          type: BeamPageType.scaleTransition,
+                          child: const AccountSettings(),
+                        );
+                      } else if (state.pathPatternSegments
+                          .contains('profile')) {
+                        return BeamPage(
+                          key: ValueKey('ProfileSettings - ${DateTime.now()}'),
+                          type: BeamPageType.scaleTransition,
+                          child: const ProfileSettings(),
+                        );
+                      }
+                      return BeamPage(
+                        key: ValueKey('Settings - ${DateTime.now()}'),
+                        type: BeamPageType.scaleTransition,
+                        child: const Settings(),
+                      );
+                    },
+                    '/dashboard': (context, state, data) => const BeamPage(
+                          key: ValueKey('Dashboard'),
+                          type: BeamPageType.scaleTransition,
+                          child: Dashboard(),
+                        ),
+                    '/profile': (context, state, data) => const BeamPage(
+                          key: ValueKey('Profile'),
+                          type: BeamPageType.scaleTransition,
+                          child: Profile(),
+                        ),
+                    '/notifications': (context, state, data) => const BeamPage(
+                          key: ValueKey('Notification'),
+                          type: BeamPageType.scaleTransition,
+                          child: Notifications(),
+                        ),
+                    '/about': (context, state, data) => const BeamPage(
+                          key: ValueKey('About'),
+                          type: BeamPageType.scaleTransition,
+                          child: About(),
+                        ),
+                  },
+                ),
 
                 // NOTE Secondary Method
-                locationBuilder: (routeInfo, data) {
-                  if (routeInfo.location!.contains('dashboard')) {
-                    return DashboardLocation(routeInfo);
-                  }
-                  if (routeInfo.location!.contains('settings')) {
-                    return SettingsLocation(routeInfo);
-                  }
-                  if (routeInfo.location!.contains('profile')) {
-                    return ProfileLocation(routeInfo);
-                  }
-                  if (routeInfo.location!.contains('notifications')) {
-                    return NotificationLocation(routeInfo);
-                  }
-                  if (routeInfo.location!.contains('about')) {
-                    return AboutLocation(routeInfo);
-                  }
-                  return NotFound(path: routeInfo.location!.toString());
-                },
+                // locationBuilder: (routeInfo, data) {
+                //   if (routeInfo.location!.contains('dashboard')) {
+                //     return DashboardLocation(routeInfo);
+                //   }
+                //   if (routeInfo.location!.contains('settings')) {
+                //     return SettingsLocation(routeInfo);
+                //   }
+                //   if (routeInfo.location!.contains('profile')) {
+                //     return ProfileLocation(routeInfo);
+                //   }
+                //   if (routeInfo.location!.contains('notifications')) {
+                //     return NotificationLocation(routeInfo);
+                //   }
+                //   if (routeInfo.location!.contains('about')) {
+                //     return AboutLocation(routeInfo);
+                //   }
+                //   return NotFound(path: routeInfo.location!.toString());
+                // },
               ),
             ),
           ),
@@ -142,6 +147,7 @@ class _SideNavState extends State<SideNav> {
   @override
   Widget build(BuildContext context) {
     final path = (context.currentBeamLocation.state as BeamState).uri.path;
+    print('path $path');
     if (path.contains('/dashboard')) {
       selected = 0;
     } else if (path.contains('/settings')) {
@@ -170,6 +176,7 @@ class _SideNavState extends State<SideNav> {
               milliseconds: 375,
             ),
             width: 120.0,
+            margin: const EdgeInsets.symmetric(vertical: 15.0),
             child: Material(
               color: Colors.transparent,
               shape: RoundedRectangleBorder(
